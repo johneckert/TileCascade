@@ -60,7 +60,6 @@ function checkLetter(letter) {
 
 function resetAllDivs() {
   allDivs = document.querySelectorAll(".tile");
-  console.log(allDivs);
   for (let i = 0; i < allDivs.length; i++) {
     allDivs[i].classList.remove("transformed");
     allDivs[i].classList.add("ready");
@@ -184,17 +183,29 @@ function cascadeChange(elementArray, chosenColor, ogDiv) {
       }
     }
   });
-  if (newArray.length > 0) {
-    setTimeout(cascadeChange, 90, newArray, chosenColor, ogDiv);
-  } else {
-    resetAllDivs();
-    go(ogDiv);
+
+  if (!quit) {
+    if (newArray.length > 0) {
+      setTimeout(cascadeChange, 90, newArray, chosenColor, ogDiv);
+    } else {
+      resetAllDivs();
+      go(ogDiv);
+    }
   }
 }
+
+let quit = false;
 
 document.addEventListener("click", function(event) {
   let ogDiv = event.target;
   let divClasses = ogDiv.className.split(" ");
   let divLocation = divClasses[2];
   go(ogDiv);
+});
+
+document.addEventListener("keyup", function(event) {
+  if (event.keyCode == 32) {
+    console.log("triggered");
+    quit = true;
+  }
 });
