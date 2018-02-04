@@ -1,12 +1,21 @@
 body {
-  width: 500px;
-  height: 500px;
+  width: 750px;
+  height: 750px;
+  padding: 40px 0 0 40px;
+}
+
+.row {
+  background-color: #333333;
+}
+
+.ready {
+  background-color: #a7a7a7;
 }
 
 .tile {
   padding-bottom: 8%;
-  /* border-radius: 20% 10%;
-  border-color: "#aaaaaa";
-  border-style: solid;
-  border-width: thin; */
+  border-radius: 30% 30%;
+  border-color: white;
+  border-style: groove;
+  border-width: thin;
 }

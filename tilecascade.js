@@ -197,10 +197,12 @@ function cascadeChange(elementArray, chosenColor, ogDiv) {
 let quit = false;
 
 document.addEventListener("click", function(event) {
-  let ogDiv = event.target;
-  let divClasses = ogDiv.className.split(" ");
-  let divLocation = divClasses[2];
-  go(ogDiv);
+  if (event.target.classList.contains("tile")) {
+    let ogDiv = event.target;
+    let divClasses = ogDiv.className.split(" ");
+    let divLocation = divClasses[2];
+    go(ogDiv);
+  }
 });
 
 document.addEventListener("keyup", function(event) {
