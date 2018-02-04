@@ -12,6 +12,7 @@ function randomColor() {
 }
 
 function setColor(element, chosenColor) {
+  element.style.backgroundColor = null;
   element.style.backgroundColor = chosenColor;
 }
 
@@ -57,7 +58,22 @@ function checkLetter(letter) {
   }
 }
 
-function cascadeChange(elementArray, chosenColor) {
+function resetAllDivs() {
+  allDivs = document.querySelectorAll(".tile");
+  console.log(allDivs);
+  for (let i = 0; i < allDivs.length; i++) {
+    allDivs[i].classList.remove("transformed");
+    allDivs[i].classList.add("ready");
+  }
+}
+
+function go(div) {
+  let chosenColor = randomColor();
+  setColor(div, chosenColor);
+  cascadeChange([div], chosenColor, div);
+}
+
+function cascadeChange(elementArray, chosenColor, ogDiv) {
   let newArray = [];
   elementArray.forEach(function(element) {
     //get classes of element
@@ -76,7 +92,7 @@ function cascadeChange(elementArray, chosenColor) {
       let optionOne = "." + lastRow + "-" + col;
       let relevantDiv = document.querySelector(optionOne);
       if (relevantDiv.classList.contains("ready")) {
-        setTimeout(setColor, 50, relevantDiv, chosenColor);
+        setTimeout(setColor, 10, relevantDiv, chosenColor);
         relevantDiv.classList.remove("ready");
         relevantDiv.classList.add("transformed");
         let optionOneDiv = document.querySelector(optionOne);
@@ -88,7 +104,7 @@ function cascadeChange(elementArray, chosenColor) {
       let optionTwo = "." + lastRow + "-" + nextCol;
       let relevantDiv = document.querySelector(optionTwo);
       if (relevantDiv.classList.contains("ready")) {
-        setTimeout(setColor, 100, relevantDiv, chosenColor);
+        setTimeout(setColor, 20, relevantDiv, chosenColor);
         relevantDiv.classList.remove("ready");
         relevantDiv.classList.add("transformed");
         let optionTwoDiv = document.querySelector(optionTwo);
@@ -100,7 +116,7 @@ function cascadeChange(elementArray, chosenColor) {
       let optionThree = "." + row + "-" + nextCol;
       let relevantDiv = document.querySelector(optionThree);
       if (relevantDiv.classList.contains("ready")) {
-        setTimeout(setColor, 150, relevantDiv, chosenColor);
+        setTimeout(setColor, 30, relevantDiv, chosenColor);
         relevantDiv.classList.remove("ready");
         relevantDiv.classList.add("transformed");
         let optionThreeDiv = document.querySelector(optionThree);
@@ -112,7 +128,7 @@ function cascadeChange(elementArray, chosenColor) {
       let optionFour = "." + nextRow + "-" + nextCol;
       let relevantDiv = document.querySelector(optionFour);
       if (relevantDiv.classList.contains("ready")) {
-        setTimeout(setColor, 200, relevantDiv, chosenColor);
+        setTimeout(setColor, 40, relevantDiv, chosenColor);
         relevantDiv.classList.remove("ready");
         relevantDiv.classList.add("transformed");
         let optionFourDiv = document.querySelector(optionFour);
@@ -124,7 +140,7 @@ function cascadeChange(elementArray, chosenColor) {
       let optionFive = "." + nextRow + "-" + col;
       let relevantDiv = document.querySelector(optionFive);
       if (relevantDiv.classList.contains("ready")) {
-        setTimeout(setColor, 250, relevantDiv, chosenColor);
+        setTimeout(setColor, 50, relevantDiv, chosenColor);
         relevantDiv.classList.remove("ready");
         relevantDiv.classList.add("transformed");
         let optionFiveDiv = document.querySelector(optionFive);
@@ -136,7 +152,7 @@ function cascadeChange(elementArray, chosenColor) {
       let optionSix = "." + lastRow + "-" + nextCol;
       let relevantDiv = document.querySelector(optionSix);
       if (relevantDiv.classList.contains("ready")) {
-        setTimeout(setColor, 300, relevantDiv, chosenColor);
+        setTimeout(setColor, 60, relevantDiv, chosenColor);
         relevantDiv.classList.remove("ready");
         relevantDiv.classList.add("transformed");
         let optionSixDiv = document.querySelector(optionSix);
@@ -148,7 +164,7 @@ function cascadeChange(elementArray, chosenColor) {
       let optionSeven = "." + row + "-" + nextCol;
       let relevantDiv = document.querySelector(optionSeven);
       if (relevantDiv.classList.contains("ready")) {
-        setTimeout(setColor, 350, relevantDiv, chosenColor);
+        setTimeout(setColor, 70, relevantDiv, chosenColor);
         relevantDiv.classList.remove("ready");
         relevantDiv.classList.add("transformed");
         let optionSevenDiv = document.querySelector(optionSeven);
@@ -160,7 +176,7 @@ function cascadeChange(elementArray, chosenColor) {
       let optionEight = "." + lastRow + "-" + lastCol;
       let relevantDiv = document.querySelector(optionEight);
       if (relevantDiv.classList.contains("ready")) {
-        setTimeout(setColor, 400, relevantDiv, chosenColor);
+        setTimeout(setColor, 80, relevantDiv, chosenColor);
         relevantDiv.classList.remove("ready");
         relevantDiv.classList.add("transformed");
         let optionEightDiv = document.querySelector(optionEight);
@@ -169,15 +185,16 @@ function cascadeChange(elementArray, chosenColor) {
     }
   });
   if (newArray.length > 0) {
-    setTimeout(cascadeChange, 450, newArray, chosenColor);
+    setTimeout(cascadeChange, 90, newArray, chosenColor, ogDiv);
+  } else {
+    resetAllDivs();
+    go(ogDiv);
   }
 }
 
 document.addEventListener("click", function(event) {
-  let div = event.target;
-  let divClasses = div.className.split(" ");
+  let ogDiv = event.target;
+  let divClasses = ogDiv.className.split(" ");
   let divLocation = divClasses[2];
-  const chosenColor = randomColor();
-  setColor(div, chosenColor);
-  cascadeChange([div], chosenColor);
+  go(ogDiv);
 });
