@@ -66,6 +66,16 @@ function resetAllDivs() {
   }
 }
 
+function fullReset() {
+  allDivs = document.querySelectorAll(".tile");
+  for (let i = 0; i < allDivs.length; i++) {
+    allDivs[i].classList.remove("transformed");
+    allDivs[i].classList.add("ready");
+    allDivs[i].style.backgroundColor = "";
+    quit = false;
+  }
+}
+
 function go(div) {
   let chosenColor = randomColor();
   setColor(div, chosenColor);
@@ -209,5 +219,6 @@ document.addEventListener("keyup", function(event) {
   if (event.keyCode == 32) {
     console.log("triggered");
     quit = true;
+    setTimeout(fullReset, 100);
   }
 });
