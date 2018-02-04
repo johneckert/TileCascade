@@ -219,6 +219,6 @@ document.addEventListener("keyup", function(event) {
   if (event.keyCode == 32) {
     console.log("triggered");
     quit = true;
-    setTimeout(fullReset, 100);
+    setTimeout(fullReset, 500);
   }
 });
