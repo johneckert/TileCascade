@@ -1,5 +1,12 @@
+body {
+  width: 500px;
+  height: 500px;
+}
+
 .tile {
-  /* background-color: #8000ff; */
   padding-bottom: 8%;
-  border-radius: 30% 10%;
+  /* border-radius: 20% 10%;
+  border-color: "#aaaaaa";
+  border-style: solid;
+  border-width: thin; */
 }
